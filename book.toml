@@ -1,0 +1,6 @@
+[book]
+authors = ["Andrew Huynh"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Spyglass User Guide"
