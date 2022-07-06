@@ -34,3 +34,35 @@ you want to search through and hit `Enter` to apply it to your current search.
 
 As you're searching, use the arrow keys to select the result you want and hit`Enter`
 to open the link in your default browser.
+
+## Viewing crawler status & forcing a recrawl
+
+Open the crawl status window by going into the system tray menu and clicking on
+the `Show crawl status` option. This will open a window like below:
+
+<p align="center">
+    <img src="./../assets/crawl-status.png" alt="Crawler status window">
+</p>
+
+The crawl status window will show the status of all URLs that has been seen by
+the system, group by their domain.
+
+> Note: The status does not auto-update, click on the refresh icon in the right corner
+> to refresh the status.
+
+* Queued - Indicates a URL that is waiting to be crawled.
+* Processing - Currently being crawled.
+* Completed - Indicates a URL that has been crawled.
+* Indexed - Indicates a URL that has ultimately been indexed.
+
+
+### `Completed` vs `Indexed`
+
+Often times the number of indexed documents may not match the number of completed.
+This does not necessarily mean something has gone wrong. Completed indicates unique
+URLs that have been crawled, but this does not always mean that it will be indexed.
+
+For example, [https://en.wikipedia.org](https://en.wikipedia.org) &
+[https://en.wikipedia.org/wiki/Main_Page](https://en.wikipedia.org/wiki/Main_Page)
+would refer to two separate URLs but ultimately only represent a single indexed document
+since they point to the same place.
