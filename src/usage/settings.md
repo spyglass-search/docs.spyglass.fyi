@@ -33,6 +33,8 @@ file found in their directory on startup, a default one will be created.
     // By default, Spyglass will only crawl things as specified in your lenses. If you want
     // to follow links without regard to those rules, set this to true.
     crawl_external_links: false,
+    // Currently the only telemetry is for bug/error reporting.
+    disable_telemetry: false,
 )
 ```
 
