@@ -5,7 +5,7 @@
 Make sure you have setup the prerequisites for [tauri](https://tauri.app/v1/guides/getting-started/prerequisites). That should get you most of the way towards the requirements for building
 spyglass.
 
-Spyglass uses [TailwindCSS]() for styling within the application. Make sure you
+Spyglass uses [TailwindCSS](https://tailwindcss.com) for styling within the application. Make sure you
 have [NPM](https://docs.npmjs.com/getting-started) installed before starting the build.
 
 A quick check-list of things you should have installed before continuing.
@@ -25,24 +25,23 @@ $> npm --version
 > NOTE: `$>` represents your command line prompt.
 
 Finally, let's setup the application dependencies. If you're running on Linux, run
-this first for some linux specific system dependencies
-```
-make setup-dev-linux
+this first for some linux specific system dependencies.
+``` bash
+$> make setup-dev-linux
 ```
 
 And finally run these commands to setup the server/client dependencies.
 
-```
-make setup-dev
+``` bash
+$> make setup-dev
 ```
 
 ## Building the Application
 
 Run the following to build the application:
 
-```
-make build-styles
-make build-release
+``` bash
+$> make build-release
 ```
 
 This will kick off a release build for your platform. Depending on your OS, this
@@ -56,18 +55,36 @@ need to watch.
 
 First, build & run the backend service:
 ``` bash
-cargo run -p spyglass
+$> cargo run -p spyglass
 ```
 
 Second, build & run the client
 ``` bash
-cargo tauri dev
+$> cargo tauri dev
 ```
 
 If you're actively working on the theming of the application itself, it's best
 to have `tailwind` in watch mode so that the CSS can be continually checked &
 built.
 
+``` bash
+$> npx tailwindcss -i ./public/input.css -o ./public/main.css --watch
 ```
-npx tailwindcss -i ./public/input.css -o ./public/main.css --watch
+
+If you're working on the default plugins, setup the `PLUGINS_DEV_FOLDER` variable
+inside the `Makefile` to point to the spyglass dev/debug data folder. This will be
+one of the following:
+
+| Platform | Path                                                                         |
+|----------|------------------------------------------------------------------------------|
+| linux    | `/home/<username>/.local/share/spyglass-dev/`                                |
+| macOS    |`/Users/<username>/Library/Application Support/com.athlabs.spyglass-dev/`     |
+| windows  | `C:\Users\<username>\AppData\Roaming\spyglass-dev\data`                      |
+
+
+To deploy plugin changes, run the following and restart your dev spyglass instance to reload
+the plugins
+
+```
+$> make build-plugins-dev
 ```
