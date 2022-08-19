@@ -1,14 +1,14 @@
-# Building your own lens
+# Indexing website topics/sites
 
-You can also create your own lenses. Once created you can drop these in your "lens"
-folder, which can be opened through the lens manager window.
+There are two ways to start indexing websites you're interested in.
 
-Here are some examples that I've been personally using:
+1. First is to install one from our [list of community built lenses](../lenses/community.html)
 
-## Curated recipe searching
+![Lens manager](./../../assets/lens-manager.png)
 
-Interested in cooking & recipes? Add a `recipe` lens which will go index a
-curated set of websites with high quality recipes.
+2. [Building your own lens](../lenses/build.html), which are simple text files which
+tell the application what to crawl & index. For example, here is a lens for recipes
+that I like to search for on a routine basis:
 
 ``` rust
 (
@@ -60,40 +60,5 @@ curated set of websites with high quality recipes.
         // index too many comments/etc. from reddit.
         LimitURLDepth("https://www.reddit.com/r/recipes", 1),
     ]
-)
-```
-
-
-## Narrowing down by a specific topic
-
-Interested in the Rust programming language? Add the `rustlang` lens which will
-index the Rust book, rust docs, crate.io, and other sites that are related to the
-programming language and not the Rust game / The Rust Belt / oxidation / etc.
-
-``` rust
-(
-    version: "1",
-    author: "Andrew Huynh",
-    name: "rustlang",
-    description: Some("Rustlang targeted websites"),
-    is_enabled: true,
-    domains: [
-        // Support for wildcards in domain names
-        "*.rust-lang.org",
-        "docs.rs",
-        "rustconf.com",
-        "crates.io",
-        "this-week-in-rust.org",
-        ...
-    ],
-
-    urls: [
-        // A `$` at the end will *only* index that particular URL and will not go
-        // deeper into the site.
-        "https://www.reddit.com/r/rust/$",
-        "https://www.reddit.com/r/rust_gamedev/$",
-    ],
-
-    rules: []
 )
 ```
