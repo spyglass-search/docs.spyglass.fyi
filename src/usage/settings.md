@@ -33,8 +33,13 @@ file found in their directory on startup, a default one will be created.
     // By default, Spyglass will only crawl things as specified in your lenses. If you want
     // to follow links without regard to those rules, set this to true.
     crawl_external_links: false,
-    // Currently the only telemetry is for bug/error reporting.
+    // Disables sending any telemetry. Currently the only telemetry is for bug/error reporting.
     disable_telemetry: false,
+    // Disables launching the application when your computer first boots up.
+    disable_autolaunch: false,
+    // Port that the search daemon runs on. Change this if you have another service
+    // already running at this port number.
+    port: 4664
 )
 ```
 
