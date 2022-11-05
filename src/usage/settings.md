@@ -3,7 +3,7 @@
 The `settings.ron` file can be found by "Show Settings folder". If there is no
 file found in their directory on startup, a default one will be created.
 
-```
+```rust
 (
     // The max number of pages to index per domain
     domain_crawl_limit: Finite(1000),
