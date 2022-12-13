@@ -7,7 +7,7 @@ Spyglass is supported on all platforms. [The latest release can always be found 
 
 | Platform          | Download Link |
 | ----------------- | --------------------------------------------- |
-| Linux (AppImage)* | [spyglass_22.12.2_amd64.AppImage][linux-link]  |
+| Linux (AppImage)* | [spyglass_22.12.3_amd64.AppImage][linux-link]  |
 | macOS             | [Spyglass_22.12.2_x64.dmg][osx-link]           |
 | Windows           | [Spyglass_22.12.2_x64_en-US.msi][windows-link] |
 
