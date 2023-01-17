@@ -1,7 +1,7 @@
 # Building your own lens
 
 You can also create your own lenses. Once created you can drop these in your "lens"
-folder, which can be opened through the lens manager window.
+folder, which can be opened through the `My Library` window.
 
 Here are some examples that I've been personally using:
 
@@ -10,7 +10,7 @@ Here are some examples that I've been personally using:
 Interested in cooking & recipes? Add a `recipe` lens which will go index a
 curated set of websites with high quality recipes.
 
-```rust
+```rust,noplayground
 (
     version: "1",
     // Be proud of your creation :). Maybe soon we can share these ;)
@@ -70,7 +70,7 @@ Interested in the Rust programming language? Add the `rustlang` lens which will
 index the Rust book, rust docs, crate.io, and other sites that are related to the
 programming language and not the Rust game / The Rust Belt / oxidation / etc.
 
-```rust
+```rust,noplayground
 (
     version: "1",
     author: "Andrew Huynh",
