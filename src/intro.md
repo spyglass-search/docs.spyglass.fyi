@@ -1,6 +1,6 @@
 # Introduction
 
-![check/build workflow](https://github.com/a5huynh/spyglass/actions/workflows/rust.yml/badge.svg)
+[![check/build workflow](https://github.com/a5huynh/spyglass/actions/workflows/rust.yml/badge.svg)](https://github.com/a5huynh/spyglass/actions/workflows/rust.yml)
 [![](https://img.shields.io/badge/discord-join%20the%20community-blue)](https://discord.gg/663wPVBSTB)
 
 > Spyglass indexes what **you** want, exposing it to you in a simple & fast interface
