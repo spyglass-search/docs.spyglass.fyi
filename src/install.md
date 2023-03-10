@@ -16,7 +16,7 @@ Spyglass is supported on all platforms. [The latest release can always be found 
 a different distro or window manager there may be some differences. Please open an issue
 if you find something completely broken.
 
-[release-page]: https://github.com/a5huynh/spyglass/releases
-[linux-link]: https://github.com/a5huynh/spyglass/releases/download/v2023.2.4/spyglass_23.2.4_amd64.AppImage
-[osx-link]: https://github.com/a5huynh/spyglass/releases/download/v2023.2.4/Spyglass_23.2.4_universal.dmg
-[windows-link]: https://github.com/a5huynh/spyglass/releases/download/v2023.2.4/Spyglass_23.2.4_x64_en-US.msi
+[release-page]: https://github.com/spyglass-search/spyglass/releases
+[linux-link]: https://github.com/spyglass-search/spyglass/releases/download/v2023.2.4/spyglass_23.2.4_amd64.AppImage
+[osx-link]: https://github.com/spyglass-search/spyglass/releases/download/v2023.2.4/Spyglass_23.2.4_universal.dmg
+[windows-link]: https://github.com/spyglass-search/spyglass/releases/download/v2023.2.4/Spyglass_23.2.4_x64_en-US.msi
