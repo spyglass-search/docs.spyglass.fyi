@@ -78,13 +78,13 @@ The manifest file defines the metadata associated with the plugin.
 )
 ```
 
-**Name**: The name of the plugin
-**Author**: The developer of the plugin
-**Description**: Description shown in the GUI used to explain what the plugin does
-**Version**: Plugin version 
-**Plugin_type**: Currently we only support the `Lens` plugin type
-**Trigger**: The lens trigger automatically used in search GUI
-**User_settings**: Optional user settings. This can be used to define configuration needed by the plugin. This configuration is used by the GUI to provide input fields in the `User Settings` menu. All configured values are passed to the plugin through environmental variables. 
+**Name**: The name of the plugin\
+**Author**: The developer of the plugin\
+**Description**: Description shown in the GUI used to explain what the plugin does\
+**Version**: Plugin version \
+**Plugin_type**: Currently we only support the `Lens` plugin type\
+**Trigger**: The lens trigger automatically used in search GUI\
+**User_settings**: Optional user settings. This can be used to define configuration needed by the plugin. This configuration is used by the GUI to provide input fields in the `User Settings` menu. All configured values are passed to the plugin through environmental variables. \
 
 ##### main.rs
 

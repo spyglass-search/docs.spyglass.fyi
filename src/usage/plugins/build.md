@@ -1,6 +1,6 @@
 # Building Plugins
 
-Currently plugins are a part of the spyglass system and require the same build environment as spyglass. See [Spyglass Build Setup]("../../build.md") for information on how to setup your environment. 
+Currently plugins are a part of the spyglass system and require the same build environment as spyglass. See [Spyglass Build Setup]("./../../../build.md") for information on how to setup your environment. 
 
 The Spyglass makefile can be used to build plugins found in the plugin directory.  Before running a build verify your makefile is properly configured
 
