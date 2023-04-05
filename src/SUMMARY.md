@@ -11,4 +11,8 @@
 - [Lenses](./usage/lenses/index.md)
   - [Community Lenses](./usage/lenses/community.md)
   - [Building your own lens](./usage/lenses/build.md)
+- [Plugins](./usage/plugins/index.md)
+  - [Building Plugins](./usage/plugins/build.md)
+  - [Writing a Plugin](./usage/plugins/plugin.md)
+  - [Installing a Plugin](./usage/plugins/install.md)
 - [Settings](./usage/settings.md)
