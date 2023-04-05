@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Writing a Plugin - Spyglass User Guide</title>
+        <!-- Custom HTML head -->
+<script defer data-domain="docs.spyglass.fyi" src="https://plausible.io/js/script.js"></script>        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../install.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../build.html"><strong aria-hidden="true">1.1.</strong> Building from source</a></li></ol></li><li class="chapter-item expanded "><a href="../../usage/index.html"><strong aria-hidden="true">2.</strong> Launching &amp; Using Spyglass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../usage/indexing/local-files.html"><strong aria-hidden="true">2.1.</strong> Indexing local files</a></li><li class="chapter-item expanded "><a href="../../usage/indexing/bookmarks.html"><strong aria-hidden="true">2.2.</strong> Indexing bookmarks</a></li><li class="chapter-item expanded "><a href="../../usage/indexing/web.html"><strong aria-hidden="true">2.3.</strong> Indexing website topics/sites</a></li></ol></li><li class="chapter-item expanded "><a href="../../usage/lenses/index.html"><strong aria-hidden="true">3.</strong> Lenses</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../usage/lenses/community.html"><strong aria-hidden="true">3.1.</strong> Community Lenses</a></li><li class="chapter-item expanded "><a href="../../usage/lenses/build.html"><strong aria-hidden="true">3.2.</strong> Building your own lens</a></li></ol></li><li class="chapter-item expanded "><a href="../../usage/plugins/index.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../usage/plugins/build.html"><strong aria-hidden="true">4.1.</strong> Building Plugins</a></li><li class="chapter-item expanded "><a href="../../usage/plugins/plugin.html" class="active"><strong aria-hidden="true">4.2.</strong> Writing a Plugin</a></li><li class="chapter-item expanded "><a href="../../usage/plugins/install.html"><strong aria-hidden="true">4.3.</strong> Installing a Plugin</a></li></ol></li><li class="chapter-item expanded "><a href="../../usage/settings.html"><strong aria-hidden="true">5.</strong> Settings</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Spyglass User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="writing-plugins"><a class="header" href="#writing-plugins">Writing Plugins</a></h1>
+<p>Currently plugins are written in Rust and compiled using the same build system as Spyglass. An example plugin can be found <a href="https://github.com/spyglass-search/spyglass/blob/main/plugins/example-plugin/src/main.rs">here</a> </p>
+<h3 id="folder-structure"><a class="header" href="#folder-structure">Folder Structure</a></h3>
+<p>The folder structure for the plugin in spyglass follows the outline below</p>
+<pre><code>&lt;SPYGLASS_REPO&gt;/plugins/&lt;PLUGIN_NAME&gt;/
+                        -------------&gt; .cargo
+                        ---------------------&gt; config.toml
+                        -------------&gt; src
+                        ------------------&gt; main.rs
+                        ------------------&gt; manifest.ron
+                        -------------&gt; Cargo.toml
+</code></pre>
+<h5 id="cargotoml"><a class="header" href="#cargotoml">Cargo.toml</a></h5>
+<p>The cargo file is a standard rust project cargo file (<a href="https://doc.rust-lang.org/cargo/reference/manifest.html">Manifest Format</a>). Below is from the example plugin. Note that the spyglass-plugin dependency is required, but all other dependencies depend on the type of plugin being written.</p>
+<pre><code class="language-toml">[package]
+name = &quot;example-plugin&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2021&quot;
+license = &quot;AGPL&quot;
+
+[[bin]]
+name = &quot;example-plugin&quot;
+path = &quot;src/main.rs&quot;
+
+[dependencies]
+serde_json = &quot;1.0&quot;
+spyglass-plugin = { path = &quot;../../crates/spyglass-plugin&quot; }
+url = &quot;2.2&quot;
+</code></pre>
+<h5 id="configtoml"><a class="header" href="#configtoml">config.toml</a></h5>
+<p>Required configuration file to define the build target</p>
+<pre><code class="language-toml">[build]
+target = &quot;wasm32-wasi&quot;
+</code></pre>
+<h5 id="manifestron"><a class="header" href="#manifestron">manifest.ron</a></h5>
+<p>The manifest file defines the metadata associated with the plugin.</p>
+<pre><code class="language-ron">(
+	name: &quot;example-plugin&quot;,
+	author: &quot;spyglass-search&quot;,
+	description: &quot;Example plugin to provide an example on how to create a plugin.&quot;,
+	version: &quot;1&quot;,
+	plugin_type: Lens,
+	trigger: &quot;example-plugin&quot;,
+	// User settings w/ the default value, this will be added the plugin environment
+	user_settings: {
+	   &quot;API_KEY&quot;: (
+	        label: &quot;Example Plugin API Key&quot;,
+	        value: &quot;&quot;,
+	        form_type: Text,
+	        restart_required: false,
+	        help_text: Some(&quot;Example with custom string configuration&quot;)
+	    ),
+	    &quot;ENABLE_API&quot;: (
+	        label: &quot;Example Plugin Enable API boolean&quot;,
+			value: &quot;&quot;,
+			form_type: Bool,
+			restart_required: false,
+			help_text: Some(&quot;Example with custom boolean configuration&quot;)
+		),
+	}
+)
+</code></pre>
+<p><strong>Name</strong>: The name of the plugin<br />
+<strong>Author</strong>: The developer of the plugin<br />
+<strong>Description</strong>: Description shown in the GUI used to explain what the plugin does<br />
+<strong>Version</strong>: Plugin version <br />
+<strong>Plugin_type</strong>: Currently we only support the <code>Lens</code> plugin type<br />
+<strong>Trigger</strong>: The lens trigger automatically used in search GUI<br />
+<strong>User_settings</strong>: Optional user settings. This can be used to define configuration needed by the plugin. This configuration is used by the GUI to provide input fields in the <code>User Settings</code> menu. All configured values are passed to the plugin through environmental variables. </p>
+<h5 id="mainrs"><a class="header" href="#mainrs">main.rs</a></h5>
+<p>The main.rs is where the plugin code begins. The full source of an example plugin can be found <a href="https://github.com/spyglass-search/spyglass/blob/main/plugins/example-plugin/src/main.rs">here</a> . Below are snippets of code from the example plugin.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use spyglass_plugin::*;
+
+#[derive(Default)]
+struct Plugin;
+
+register_plugin!(Plugin);
+<span class="boring">}
+</span></code></pre></pre>
+<p>The most basic start of a plugin is defining a struct and registering it with the system using the <code>register_plugin!</code> macro. After the plugin has been defined and registered the <code>Plugin</code> struct needs to implement the <code>SpyglassPlugin</code> trait. </p>
+<blockquote>
+<p>The <code>SpyglassPlugin</code> trait defines the set of required methods for a plugin</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait SpyglassPlugin {
+
+/// Initial plugin load, setup any configuration you need here as well as
+/// subscribe to specific events.
+fn load(&amp;mut self);
+
+/// Asynchronous updates for plugin events
+fn update(&amp;mut self, event: PluginEvent);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>Implement the <code>SpyglassPlugin</code> trait and define the plugins functionality</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl SpyglassPlugin for Plugin {
+
+    fn load(&amp;mut self) {
+		let _ = subscribe_for_updates();
+	}
+
+	fn update(&amp;mut self, event: PluginEvent) {
+
+		match event {
+			PluginEvent::IntervalUpdate =&gt; {
+				//DO STUFF HERE
+			}
+			PluginEvent::HttpResponse { url: _, result } =&gt; {
+			   // DO STUFF HERE
+			}
+			PluginEvent::DocumentResponse {
+				request_id: _,
+				page_count: _,
+				page: _,
+				documents,
+				} =&gt; {
+				// DO STUFF HERE
+			}
+		}
+	}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>load</code> method is called each time the plugin is loaded. Plugins are loaded when Spyglass starts and when a user toggles the plugin to the enabled state. </p>
+<p>The <code>update</code> method is called when asynchronous events occur. This method will only be called in response to an action taken by the plugin. Example calling <code>subscribe_for_updates()</code> will trigger the update method to be called with the <code>IntervalUpdate</code> event every 10 minutes</p>
+<h4 id="api-helper-methods"><a class="header" href="#api-helper-methods">API Helper Methods</a></h4>
+<p>Following is the list of API methods available for plugins. Note plugins are in active development and the API can change. <a href="https://github.com/spyglass-search/spyglass/blob/main/crates/spyglass-plugin/src/shims.rs">Shims</a> is a good place to check to see the current methods available.</p>
+<blockquote>
+<p>Helper Functions</p>
+</blockquote>
+<p>Note that all helper functions are asynchronous. All requested data will be provided through the update method asynchronously.</p>
+<p>Log is used to write a string message into the server log. This is used for debugging. Note that due to the nature of the wasm environment <code>println!</code> cannot be used</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn log(msg: &amp;str)
+<span class="boring">}
+</span></code></pre></pre>
+<p>Enqueue all is used to add urls to the list of urls to crawl and index. After calling this method the Spyglass system will add the urls in question to the crawl queue and index the documents as part of normal processing</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn enqueue_all(urls: &amp;[String])
+<span class="boring">}
+</span></code></pre></pre>
+<p>Delete doc will delete a document from the index. This can be used to remove documents that were added by the plugin, but are no longer needed.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn delete_doc(url: &amp;str)
+<span class="boring">}
+</span></code></pre></pre>
+<p>Modify tags is used to add or remove tags for all documents that match the query. This allows plugins to add custom tags to documents found in the index.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn modify_tags(query: DocumentQuery, modification: TagModification) -&gt; Result&lt;(), ron::Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Query documents can be used to access documents found in the index based on the document query.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn query_documents(query: DocumentQuery) -&gt; Result&lt;(), ron::Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Subscribe for documents is the same as query documents, but will run the query at a regular interval and send the results to the update method. This is useful if the plugin is designed to watch for new documents and update tags for those documents. </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn subscribe_for_documents(query: DocumentQuery) -&gt; Result&lt;(), ron::Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Subscribe for updates will tell spyglass to send an interval update to the plugin every 10 minutes.  This can be used to allow the plugin to run updates at a regular interval.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn subscribe_for_updates() -&gt; Result&lt;(), ron::Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Add document will add a document to the index. If a document with the same <code>url</code> already exists the document will be updated with the provided contents</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn add_document(documents: Vec&lt;DocumentUpdate&gt;, tags: Vec&lt;Tag&gt;) -&gt; Result&lt;(), ron::Error&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>Helper Structs</p>
+</blockquote>
+<p><code>Http</code> is an available struct that can be used to make http requests. Due to the type of wasm module used popular http libraries like reqwest will not work, instead we provide a basic Http helper that can be used for requests. Just like the helper functions all requests return results asynchronously through the <code>update</code> method.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Http {
+	pub fn get(url: &amp;str, headers: Vec&lt;(String, String)&gt;)
+	pub fn request(url: &amp;str) -&gt; HttpRequestBuilder 
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Http::get(&quot;...&quot;, vec![])</code></p>
+<p>Generates a get request for the specified url. The request is the same as calling <code>Http::request(url).headers(headers).get().run()</code></p>
+<p>For more options in building http requests the <code>request</code> method can be used.
+<code>Http::request(&quot;...&quot;)</code></p>
+<p><code>HttpRequestBuilder</code> is a helper used to build an http request.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl HttpRequestBuilder {
+	// Builds a request that is a get request
+	pub fn get(&amp;self) -&gt; Self 
+	// Builds a request that is a put request
+	pub fn put(&amp;self) -&gt; Self 
+	// Builds a request that is a post request
+	pub fn post(&amp;self) -&gt; Self 
+	// Builds a request that is a patch request
+	pub fn patch(&amp;self) -&gt; Self 
+	// Builds a request that is a delete request
+	pub fn delete(&amp;self) -&gt; Self 
+	// Adds a body to the request
+	pub fn body(&amp;self, new_body: String) -&gt; Self 
+	// Adds headers to the request
+	pub fn headers(&amp;self, new_headers: Vec&lt;(String, String)&gt;) -&gt; Self 
+	// Add basic authentication to the request
+	pub fn basic_auth(&amp;self, key: &amp;str, val: Option&lt;String&gt;) -&gt; Self 
+	// Adds bearer auth to the request
+	pub fn bearer_auth(&amp;self, key: &amp;str) -&gt; Self 
+	// Runs the http request. Results will be sent to the update method
+	pub fn run(&amp;self) 
+}
+<span class="boring">}
+</span></code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../usage/plugins/build.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../usage/plugins/install.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../usage/plugins/build.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../usage/plugins/install.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

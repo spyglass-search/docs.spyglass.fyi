@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Settings - Spyglass User Guide</title>
+        <!-- Custom HTML head -->
+<script defer data-domain="docs.spyglass.fyi" src="https://plausible.io/js/script.js"></script>        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="../install.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../build.html"><strong aria-hidden="true">1.1.</strong> Building from source</a></li></ol></li><li class="chapter-item expanded "><a href="../usage/index.html"><strong aria-hidden="true">2.</strong> Launching &amp; Using Spyglass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../usage/indexing/local-files.html"><strong aria-hidden="true">2.1.</strong> Indexing local files</a></li><li class="chapter-item expanded "><a href="../usage/indexing/bookmarks.html"><strong aria-hidden="true">2.2.</strong> Indexing bookmarks</a></li><li class="chapter-item expanded "><a href="../usage/indexing/web.html"><strong aria-hidden="true">2.3.</strong> Indexing website topics/sites</a></li></ol></li><li class="chapter-item expanded "><a href="../usage/lenses/index.html"><strong aria-hidden="true">3.</strong> Lenses</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../usage/lenses/community.html"><strong aria-hidden="true">3.1.</strong> Community Lenses</a></li><li class="chapter-item expanded "><a href="../usage/lenses/build.html"><strong aria-hidden="true">3.2.</strong> Building your own lens</a></li></ol></li><li class="chapter-item expanded "><a href="../usage/plugins/index.html"><strong aria-hidden="true">4.</strong> Plugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../usage/plugins/build.html"><strong aria-hidden="true">4.1.</strong> Building Plugins</a></li><li class="chapter-item expanded "><a href="../usage/plugins/plugin.html"><strong aria-hidden="true">4.2.</strong> Writing a Plugin</a></li><li class="chapter-item expanded "><a href="../usage/plugins/install.html"><strong aria-hidden="true">4.3.</strong> Installing a Plugin</a></li></ol></li><li class="chapter-item expanded "><a href="../usage/settings.html" class="active"><strong aria-hidden="true">5.</strong> Settings</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Spyglass User Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="settings"><a class="header" href="#settings">Settings</a></h1>
+<p>The <code>settings.ron</code> file can be found by &quot;Show Settings folder&quot;. If there is no
+file found in their directory on startup, a default one will be created.</p>
+<pre><code class="language-ron">(
+    // The max number of pages to index per domain
+    domain_crawl_limit: Finite(1000),
+    // The max number of crawlers per domain
+    inflight_domain_limit: Finite(2),
+    // The max number of crawlers in total
+    inflight_crawl_limit: Finite(10),
+    // Not used... yet!
+    run_wizard: false,
+    // Not used... yet!
+    allow_list: [],
+    // Domains to completely ignore, regardless of the lenses you have installed.
+    block_list: [
+      &quot;web.archive.org&quot;,
+      &quot;w3schools.com&quot;
+    ],
+    // Shortcut to launch the search bar
+    shortcut: &quot;CmdOrCtrl+Shift+/&quot;,
+    // Where to store your index and index metadata
+    // The exact default location is dependent on your OS
+    //
+    // - NOTE: If you're updating this for Windows, the path needs to use double backward slashes
+    //   like so: &quot;E:\\spyglass\\data&quot;
+    // - Linux &amp; macOS uses paths like below
+    //
+    data_directory: &quot;/Users/&lt;username&gt;/Library/Application Support/com.athlabs.spyglass&quot;,
+    // By default, Spyglass will only crawl things as specified in your lenses. If you want
+    // to follow links without regard to those rules, set this to true.
+    crawl_external_links: false,
+    // Disables sending any telemetry. Currently the only telemetry is for bug/error reporting.
+    disable_telemetry: false,
+    // Disables launching the application when your computer first boots up.
+    disable_autolaunch: false,
+    filesystem_settings: (
+        enable_filesystem_scanning: true,
+        watched_paths: [
+            &quot;&lt;PATH TO WATCH&gt;&quot;,
+        ],
+        supported_extensions: [
+            &quot;docx&quot;,
+            &quot;html&quot;,
+            &quot;md&quot;,
+            &quot;txt&quot;,
+            &quot;ods&quot;,
+            &quot;xls&quot;,
+            &quot;xlsx&quot;,
+        ],
+    ),
+    // Port that the search daemon runs on. Change this if you have another service
+    // already running at this port number.
+    port: 4664,
+    user_action_settings: (
+        actions: [
+            (
+                label: &quot;Copy URL to Clipboard&quot;,
+                status_msg: Some(&quot;Copying...&quot;),
+                action: CopyToClipboard(&quot;{{ open_url }}&quot;),
+                key_binding: &quot;CmdOrCtrl+C&quot;,
+            ),
+        ],
+        context_actions: [],
+    ),
+    audio_settings: (
+        enable_audio_transcription: false,
+    ),
+)
+</code></pre>
+<h3 id="updating-the-shortcut"><a class="header" href="#updating-the-shortcut">Updating the Shortcut</a></h3>
+<p>The Shortcut can be modified directly through the <code>User Settings</code> menu. The field will automatically record the keystrokes used. You can also type in the desired shortcut using the information below.</p>
+<p>To update the shortcut combine the following modifiers w/ an appropriate
+<a href="https://docs.rs/tao/0.8.3/tao/keyboard/enum.KeyCode.html">keycode</a> combining each key with a &quot;+&quot;.</p>
+<p>Supported Modifiers:</p>
+<ul>
+<li>&quot;Option&quot; / &quot;Alt&quot;</li>
+<li>&quot;Control&quot; / &quot;Ctrl&quot;</li>
+<li>&quot;Command&quot; / &quot;Cmd&quot; / &quot;Super&quot;</li>
+<li>&quot;Shift&quot;</li>
+<li>&quot;CmdOrCtrl&quot;</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>&quot;CmdOrCtrl+/&quot; =&gt; Launches the app w/ <code>Cmd</code> or <code>Ctrl</code> + <code>/</code></li>
+<li>&quot;CmdOrCtrl+Shift+/&quot; =&gt; Launches the app w/ <code>Cmd</code> or <code>Ctrl</code> + <code>Shift</code> + <code>/</code></li>
+<li>&quot;Shift+4&quot; =&gt; Launches the app w/ <code>Shift</code> + <code>4</code></li>
+</ul>
+<p>NOTE: Shortcuts are allowed to have any number of modifiers but only a <em>single</em> key.
+For example, <code>Shift+4</code> will work but not <code>Shift+4+2</code></p>
+<h3 id="updating-user-actions"><a class="header" href="#updating-user-actions">Updating User Actions</a></h3>
+<p>Currently user actions must be configured directly in the settings configuration file. The user actions configuration allows a user to define any number of actions that can be taken on a selected search result. When a result is selected the actions menu provides the list of currently available actions.</p>
+<p>There are currently three types of actions that can be configured. </p>
+<ul>
+<li>
+<p><strong>OpenApplication</strong> <br />
+Open application takes two arguments the application to open and the path to pass to the application. One Windows and Linux the application is any application that is in the systems path. On Mac the application must be a valid application in the application folder. The path is the path you want to open with the application. The below example works on Windows to open the selected file in Visual Studio Code</p>
+<pre><code class="language-ron">(
+    label: &quot;Open In Vs Code&quot;,
+    status_msg: Some(&quot;Opening...&quot;),
+    action: OpenApplication(&quot;code&quot;, &quot;{{ open_url }}&quot;),
+    key_binding: &quot;CmdOrCtrl+O&quot;,
+)
+</code></pre>
+</li>
+<li>
+<p><strong>OpenUrl</strong> <br />
+Open Url works the same as OpenApplication but only takes a single argument, the url to open. This action utilizes the default system application to open the url. Note that by default pressing <code>enter</code> on a selected result executes the OpenUrl action with the {{ open_url }} argument. This custom action is useful if you want to modify the url. The below example modifies the url to work with Obsidian to open a markdown file that is part of an Obsidian vault</p>
+<pre><code class="language-ron">(
+    label: &quot;Open In Vault&quot;,
+    status_msg: Some(&quot;Opening...&quot;),
+    action: Open(&quot;obsidian://open?vault={{slice_path url 5 count=1}}&amp;file={{slice_path url 6}}&quot;),
+    key_binding: &quot;CmdOrCtrl+V&quot;,
+)
+</code></pre>
+</li>
+<li>
+<p><strong>CopyToClipboard</strong> <br />
+The copy to clipboard action is used to copy the argument to the clipboard. This allows the user to copy the url or other information about the document to the clipboard. The below example is part of the default configuration and is used to copy the documents url to the clipboard</p>
+<pre><code class="language-ron">(
+    label: &quot;Copy URL to Clipboard&quot;,
+    status_msg: Some(&quot;Copying...&quot;),
+    action: CopyToClipboard(&quot;{{ open_url }}&quot;),
+    key_binding: &quot;CmdOrCtrl+C&quot;,
+)
+</code></pre>
+</li>
+</ul>
+<h4 id="action-configuration"><a class="header" href="#action-configuration">Action Configuration</a></h4>
+<p>The action configuration as seen above is made up of four properties </p>
+<ul>
+<li>label - This is the label shown on the action menu</li>
+<li>status_msg - This is the message shown in the bottom left of the search window when the action is being executed</li>
+<li>action - This is the action with arguments that should be executed</li>
+<li>key_binding - The key binding is the keyboard shortcut that will trigger the action. This allows the keyboard to be used instead of selecting the action with the mouse</li>
+</ul>
+<p>As part of the action configuration, templates are typically used to define arguments. The template syntax uses the <a href="https://docs.rs/handlebars/latest/handlebars/">handlebars</a> template framework. All of the default behavior defined in the <a href="https://docs.rs/handlebars/latest/handlebars/">handlebars</a> documentation is supported as well as one custom function.</p>
+<h4 id="context-action-configuration"><a class="header" href="#context-action-configuration">Context Action Configuration</a></h4>
+<p>Actions configured under the <code>actions</code> section are available for all search results. Actions defined in the <code>context_actions</code> section will only be available for results that match the context. Note that the same key binding for an action and context action can be used and the context action will override the action when triggering from a keyboard. </p>
+<p>To configure context actions define a context and the action definition </p>
+<pre><code class="language-ron">(
+    context: (
+        has_tag: Some([
+            (&quot;type&quot;, &quot;directory&quot;),
+        ]),
+        has_tag_type: None,
+        exclude_tag: None,
+        exclude_tag_type: None,
+        url_like: None,
+    ),
+    actions: [
+        (
+            label: &quot;Open in VS Code&quot;,
+            status_msg: None,
+            action: OpenApplication(&quot;code&quot;, &quot;{{ open_url }}&quot;),
+            key_binding: &quot;CmdOrCtrl+Enter&quot;,
+        ),
+    ],
+)
+</code></pre>
+<p>Multiple context actions can be defined and for every matching context one or more actions can be defined. The action definition follows the standard action definition. The context definition is as follows</p>
+<ul>
+<li>has_tag - Optional list of tags to match against the search result</li>
+<li>has_tag_type - Optional list of tag types to match against </li>
+<li>exclude_tag - Optional list of tags to exclude. Any search result that has one of these tags will not have these actions available</li>
+<li>exclude_tag_type - Optional list of tag types. Any search result that has a tag of this type will not have these actions available</li>
+<li>url_like - Optional list of urls that must match the url of the search result. </li>
+</ul>
+<p>In the example above that action to open the url in VS Code would only be valid for search results that have the tag <code>type=directory</code> </p>
+<h4 id="template-fields"><a class="header" href="#template-fields">Template Fields</a></h4>
+<p>The template fields available for each entry are as follows</p>
+<ul>
+<li>doc_id - The unique id of the document</li>
+<li>crawl_uri - The uri used to crawl the result</li>
+<li>domain - The domain for the result</li>
+<li>title - The title of the result</li>
+<li>description - The description of the result</li>
+<li>url - The url for the result</li>
+<li>open_url - The url used by default to open the result, this is a normalized url for the os</li>
+<li>tags - The list of tags for the result</li>
+<li>score - The documents score</li>
+<li>url_schema - The schema of the url</li>
+<li>url_userinfo - The user info for the url if present</li>
+<li>url_parent - The parent of the url</li>
+<li>url_port - The port of the url</li>
+<li>url_path - The full url path as a list of strings</li>
+<li>url_path_length - The length of the path</li>
+<li>url_query - The query string for the url if present</li>
+</ul>
+<h4 id="custom-function"><a class="header" href="#custom-function">Custom Function</a></h4>
+<p><strong>slice_path</strong> custom helper function has been added to help select parts of a path. The function requires a valid url. The syntax is as follows</p>
+<p><code>{{slice_path &lt;Template Var&gt; &lt;Start Index&gt; [&lt;End Index&gt;] [count=&lt;Count&gt;] [full_uri=&lt;true|false&gt;]}}</code></p>
+<ul>
+<li>slice_path - is the function name to execute</li>
+<li>&lt;Template Var&gt; - is required and is the field to access from the selected search result, typically <code>url</code></li>
+<li>&lt;Start Index&gt; - is required and is the index to start from (0 indexed)</li>
+<li>[&lt;End Index&gt;] - Optional end index, if not defined and count is also not defined then the last index in the path is used</li>
+<li>[count=&lt;Count&gt;] - Optional count is used to define the number of elements to access. This is helpful when the start index is a negative number so the end index cannot be known statically</li>
+<li>[full_uri=&lt;true|false&gt;] - Optional property used to identify if the output of slice_path should just be the path or the full uri.</li>
+</ul>
+<p>Examples</p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url 1}}</code> <br />
+<strong>Output</strong> - b/c/d/e </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url -1}}</code> <br />
+<strong>Output</strong> - e </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url -2}}</code> <br />
+<strong>Output</strong> - d/e </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url 1 3}}</code> <br />
+<strong>Output</strong> - b/c/d </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url 1 -1}}</code> <br />
+<strong>Output</strong> - b/c/d </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url -2 count=1}}</code> <br />
+<strong>Output</strong> - d </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url -2 count=2}}</code> <br />
+<strong>Output</strong> - d/e </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url 0 -1 full_uri=true}}</code> <br />
+<strong>Output</strong> - http://test.com/a/b/c/d </p>
+<p>url = http://test.com/a/b/c/d/e <br />
+<code>{{slice_path url 0 -2 full_uri=true}}</code> <br />
+<strong>Output</strong> - http://test.com/a/b/c </p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../usage/plugins/install.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../usage/plugins/install.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
