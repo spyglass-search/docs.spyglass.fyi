@@ -1,6 +1,6 @@
 # Building from Source
 
-## 🔧 Prerequisites & Dependencies
+## 🔧 Setup
 
 Before diving into the build process, ensure you have all necessary tools and dependencies installed:
 1. **make**:
