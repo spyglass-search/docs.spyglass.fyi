@@ -1,12 +1,17 @@
 # Building from Source
 
-## Dependencies
+## 🔧 Prerequisites & Dependencies
 
-Make sure you have setup the prerequisites for [tauri](https://tauri.app/v1/guides/getting-started/prerequisites). That should get you most of the way towards the requirements for building
-spyglass.
+Before diving into the build process, ensure you have all necessary tools and dependencies installed:
+1. **make**:
+   - **macOS/Linux**: Use your package manager (like [Homebrew](https://brew.sh/) or `apt-get`) to install `make`.
+   - **Windows**: Either [download Make for Windows](https://gnuwin32.sourceforge.net/packages/make.htm) or use [Chocolatey](https://chocolatey.org/install) with `choco install make`.
 
-Spyglass uses [TailwindCSS](https://tailwindcss.com) for styling within the application. Make sure you
-have [NPM](https://docs.npmjs.com/getting-started) installed before starting the build.
+2. **Tauri**:
+   - Follow the [prerequisites for Tauri](https://tauri.app/v1/guides/getting-started/prerequisites/) to set up your environment.
+
+3. **NPM & TailwindCSS**:
+   - Spyglass utilizes [TailwindCSS](https://tailwindcss.com/) for styling. Ensure you have [NPM](https://docs.npmjs.com/getting-started) set up.
 
 A quick check-list of things you should have installed before continuing.
 At the time of writing, you should be able to see similar versions below:
@@ -21,33 +26,19 @@ cargo 1.61.0 (a028ae42f 2022-04-29)
 $> npm --version
 8.10.0
 ```
-
 > NOTE: `$>` represents your command line prompt.
 
-Finally, let's setup the application dependencies. If you're running on Linux, run
-this first for some linux specific system dependencies.
+If you're on Linux, start by setting up system-specific dependencies:
 ``` bash
 $> make setup-dev-linux
 ```
 
 And finally run these commands to setup the server/client dependencies.
-
 ``` bash
 $> make setup-dev
 ```
 
-## Building the Application
-
-Run the following to build the application:
-
-``` bash
-$> make build-release
-```
-
-This will kick off a release build for your platform. Depending on your OS, this
-will produce a `dmg` (macos), `msi` (windows) or `appimage` (linux) file.
-
-## Development Builds
+## 🏗️ Development Builds
 
 When running in development, it is best to have the spyglass client & backend running
 in two different terminal tabs/windows. Both will have their own logs that you'll
@@ -55,12 +46,12 @@ need to watch.
 
 First, build & run the backend service:
 ``` bash
-$> cargo run -p spyglass
+$> make run-backend-dev
 ```
 
 Second, build & run the client
 ``` bash
-$> cargo tauri dev
+$> make run-client-dev
 ```
 
 If you're actively working on the theming of the application itself, it's best
@@ -88,3 +79,14 @@ the plugins
 ```
 $> make build-plugins-dev
 ```
+
+## 🚀 Release Builds
+
+Run the following to build the application:
+
+``` bash
+$> make build-release
+```
+
+This will kick off a release build for your platform. Depending on your OS, this
+will produce a `dmg` (macos), `msi` (windows) or `appimage` (linux) file.
