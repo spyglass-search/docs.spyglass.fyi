@@ -1,4 +1,4 @@
-# Building from Source
+# Building from Source (make)
 
 ## 🔧 Setup
 
@@ -41,8 +41,7 @@ $> make setup-dev
 ## 🏗️ Development Builds
 
 When running in development, it is best to have the spyglass client & backend running
-in two different terminal tabs/windows. Both will have their own logs that you'll
-need to watch.
+in two different terminal tabs/windows. Both will have their own logs that you'll need to watch.
 
 First, build & run the backend service:
 ``` bash
